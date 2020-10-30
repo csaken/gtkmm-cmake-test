@@ -1,18 +1,24 @@
 # Set the minimum version of cmake required to build this project
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 
-set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake)
-set(VCPKG_TARGET_TRIPLET=x64-windows)
 
-project(Gtk-Photos)
+if (WIN32)
+  set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake)
+  set(VCPKG_TARGET_TRIPLET=x64-windows)
+else()
+endif()
+
+project(gtkmm-test)
 
 if (NOT VCPKG_TOOLCHAIN)
+  message(STATUS "Not using VCPKG toolchain" )
   find_package(PkgConfig)
   pkg_check_modules(GTKMM gtkmm-3.0)
   include_directories(${GTKMM_INCLUDE_DIRS})
   link_directories(${GTKMM_LIBRARY_DIRS}) 
   link_libraries(${GTKMM_LIBRARIES})
 else()
+  message(STATUS "Using VCPKG toolchain" )
   find_library(ATKMM_LIBRARY atkmm)
   link_libraries(${ATKMM_LIBRARY})
   find_library(CAIROMM_LIBRARY cairomm-1.0)
@@ -43,4 +49,4 @@ endif ()
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-add_executable(Gtk-Photos ${GUI_OPTION} main.cpp)
+add_executable(gtkmm-test ${GUI_OPTION} main.cpp)
