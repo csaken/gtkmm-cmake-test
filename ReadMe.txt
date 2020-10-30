@@ -13,4 +13,4 @@ To use vcpkg with Visual Studio, run (this may require administrator elevation):
 	
 Install gtkmm library and it's dependencies
 
-	.\vcpkg\vcpkg install gtkmm
+	.\vcpkg\vcpkg install gtkmm:x64-windows

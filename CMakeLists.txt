@@ -1,5 +1,5 @@
 # Set the minimum version of cmake required to build this project
-CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake)
 set(VCPKG_TARGET_TRIPLET=x64-windows)
@@ -10,7 +10,7 @@ if (NOT VCPKG_TOOLCHAIN)
   find_package(PkgConfig)
   pkg_check_modules(GTKMM gtkmm-3.0)
   include_directories(${GTKMM_INCLUDE_DIRS})
-  link_directories(${GTKMM_LIBRARY_DIRS})
+  link_directories(${GTKMM_LIBRARY_DIRS}) 
   link_libraries(${GTKMM_LIBRARIES})
 else()
   find_library(ATKMM_LIBRARY atkmm)
@@ -43,4 +43,4 @@ endif ()
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-add_executable(HelloWorld ${GUI_OPTION} main.cpp)
+add_executable(Gtk-Photos ${GUI_OPTION} main.cpp)
